@@ -1,0 +1,16 @@
+#index-page {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+
+  .ant-select,
+  .ant-btn {
+    margin: auto;
+    width: 300px;
+  }
+
+  .ant-btn {
+    margin-top: 24px;
+  }
+}
