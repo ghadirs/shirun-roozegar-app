@@ -11,12 +11,42 @@ function IndexPage() {
   const [teams, setTeams] = React.useState([]);
 
   const createTeams = () => {
-    var arr = [];
+    var finalTeams = [];
+    var finalPlayers = [];
     var playersCount = selectedPlayers.length;
-    var playersPerTeam = Math.abs(playersCount / 2);
-    var minPlayersPerTeam = Math.floor(playersCount / 2);
-    var hasSubPlayers = playersPerTeam - minPlayersPerTeam;
-    console.log(hasSubPlayers);
+    var playersPerTeam = Math.abs(
+      playersCount / Math.floor(playersCount / defaultTeamSize)
+    );
+    var minPlayersPerTeam = Math.floor(
+      playersCount / Math.floor(playersCount / defaultTeamSize)
+    );
+    var teamsCount = Math.floor(playersCount / minPlayersPerTeam);
+    var subPlayersCount = playersCount - minPlayersPerTeam * 3;
+
+    selectedPlayers.forEach((plyr) => {
+      let max = teamsCount;
+      let min = 1;
+      let randomPlayerTeamId = Math.floor(Math.random() * max) + min;
+      return finalPlayers.push({
+        ...plyr,
+        teamId: randomPlayerTeamId,
+      });
+    });
+
+    var teamsCountArray = [];
+
+    for (let i = 1; i <= teamsCount; i++) {
+      teamsCountArray.push(i);
+    }
+
+    var sampleTeamsArr = Array.from(teamsCountArray);
+    console.log(teamsCountArray);
+
+    sampleTeamsArr.forEach((team) =>
+      finalTeams.push(finalPlayers.filter((plyr) => plyr.teamId == team))
+    );
+
+    setTeams(finalTeams);
   };
 
   return (
@@ -35,6 +65,7 @@ function IndexPage() {
               );
             })}
           </Select>
+
           <Button type='primary' onClick={() => setStage("PLAYERS_SELECTION")}>
             بعدی
           </Button>
@@ -42,6 +73,7 @@ function IndexPage() {
       ) : stage === "PLAYERS_SELECTION" ? (
         <>
           <Select
+            allowClear
             mode='multiple'
             value={selectedPlayers}
             options={options}
@@ -54,16 +86,26 @@ function IndexPage() {
               );
             })}
           </Select>
+          <span>تعداد بازیکنان: {selectedPlayers.length}</span>
           <Button type='primary' onClick={() => createTeams()}>
             بعدی
           </Button>
+
+          <div>
+            {teams &&
+              teams.length > 0 &&
+              teams.map((team, index) => (
+                <ul>
+                  <span>team {index + 1}</span>
+                  {team.map((player) => (
+                    <li>{player.label}</li>
+                  ))}
+                </ul>
+              ))}
+          </div>
         </>
       ) : stage === "TEAMS" ? (
-        <div>
-          {teams.map((team) => (
-            <div>{team.map((player) => player.name)}</div>
-          ))}
-        </div>
+        <></>
       ) : (
         <></>
       )}

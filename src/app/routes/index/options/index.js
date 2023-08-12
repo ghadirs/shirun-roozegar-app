@@ -19,6 +19,54 @@ export const options = [
     label: "همایون",
     value: 5,
   },
+  {
+    label: "عرفان",
+    value: 6,
+  },
+  {
+    label: "احسان",
+    value: 7,
+  },
+  {
+    label: "رضا",
+    value: 8,
+  },
+  {
+    label: "سامان",
+    value: 9,
+  },
+  {
+    label: "امیر علی",
+    value: 10,
+  },
+  {
+    label: "سعید",
+    value: 11,
+  },
+  {
+    label: "حجت",
+    value: 12,
+  },
+  {
+    label: "امیر",
+    value: 13,
+  },
+  {
+    label: "حسین",
+    value: 14,
+  },
+  {
+    label: "شایان",
+    value: 15,
+  },
+  {
+    label: "محمد",
+    value: 16,
+  },
+  {
+    label: "علی",
+    value: 17,
+  },
 ];
 
 export const teamCountOptions = [
